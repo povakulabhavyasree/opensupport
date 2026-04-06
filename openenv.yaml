@@ -1,0 +1,53 @@
+# OpenEnv Configuration File
+# 📞 Call-Center OpenEnv: Multi-Turn AI Support Simulator
+
+name: callcenter-env
+description: Realistic multi-turn AI customer support simulation for training agents to handle complex scenarios.
+version: "2.0"
+
+# Environment settings
+environment:
+  entry_point: environment.py
+  class_name: Env
+  max_steps: 5     # Support for multi-turn conversations
+  reward_range: [0.0, 1.0]
+  done_threshold: 0.8  # Increased threshold for high-quality training
+
+# Task definitions
+tasks:
+  easy:
+    name: Easy - Shop Timing & Access
+    issue_type: timing
+    mood: calm
+    description: Customer asks about opening times, parking, and weekend access
+  
+  medium:
+    name: Medium - Damaged Product Refund
+    issue_type: refund
+    mood: neutral
+    description: Customer requests refund/replacement for snapped Bluetooth headphones
+  
+  hard:
+    name: Hard - Multi-Issue Escalation
+    issue_type: multi_issue
+    mood: angry
+    description: Platinum customer with water-damaged laptop and double-billing error
+
+# Grading criteria (0.1 granularity)
+grading:
+  pillars:
+    correctness: 0.3
+    politeness: 0.2
+    completeness: 0.3
+    emotion: 0.2
+  penalties:
+    short_response: -0.2
+    rude_dismissive: -0.4
+    irrelevant: -0.2
+  max_score: 1.0
+
+# Inference settings
+inference:
+  model: meta-llama/Llama-3.1-70B-Instruct
+  provider: Hugging Face Router
+  api_base: https://router.huggingface.co/v1

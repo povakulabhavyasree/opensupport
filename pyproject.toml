@@ -1,0 +1,18 @@
+[project]
+name = "ecommerce-openenv"
+version = "0.1.0"
+description = "AI E-commerce Support OpenEnv"
+authors = [
+  { name = "Pradeep Kumar" }
+]
+
+dependencies = [
+  "fastapi",
+  "uvicorn",
+  "openai",
+  "pydantic",
+  "openenv-core>=0.2.0"
+]
+
+[project.scripts]
+server = "server.app:main"
